@@ -19,7 +19,6 @@ steps:
     jenkinsBuild: 'LastSuccessfulBuild'
     
 
--
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
