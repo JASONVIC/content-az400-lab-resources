@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  Default
+
+steps:
+
+- task: JenkinsDownloadArtifacts@1
+  inputs:
+    jenkinsServerConnection: 'Jenkins'
+    jobName: 'nodejs'
+    saveTo: 'jenkinsArtifacts'
+    jenkinsBuild: 'LastSuccessfulBuild'
+    
+
+-
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'SP'
+    appType: 'webAppLinux'
+    WebAppName: 'webappwrjaryzawj3fc-webapp'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
